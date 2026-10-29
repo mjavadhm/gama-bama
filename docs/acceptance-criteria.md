@@ -13,10 +13,17 @@
 - [ ] سؤال ترکیبی بتواند چند مبحث یا فصل مرتبط داشته باشد.
 - [ ] تغییر یکی از سه نوع رابطه، دو نوع دیگر را بدون درخواست صریح تغییر ندهد.
 - [ ] صرف ارتباط یا شباهت سؤال‌ها، رابطهٔ منشأ تولید ایجاد نکند.
-- [ ] فیلدهای کنترلی (`status`, `judge_score`, `judge_reasoning`, `solver_answer`, `solver_agreement`, `novelty_score`, `verification_method`, `reject_reason_codes`, `change_type`, `cost`) برای سؤال تولیدشده ذخیره و خوانده شوند.
-- [ ] ارجاع به تکه‌های کتاب درسی در جدول `textbook_references` به‌همراه نمرهٔ شباهت ذخیره شود.
+- [ ] فیلدهای محتوای پایه (`question_text`, `options`, `correct_answer`, `solution`, `source_info`, `question_kind`) ذخیره شوند.
+- [ ] اتصال `related_exam_questions` منحصراً به سؤال‌هایی با `question_kind = 'exam'` محدود شود.
+- [ ] فیلدهای شواهد (`evidence_reason`, `change_type_applied`) در رابطهٔ `generation_sources` ذخیره شوند.
+- [ ] ثبت هر دور از حلقه در موجودیت `generation_attempts` با تمام جزئیات (توکن‌ها، هزینه، خروجی Solver، تطابق، رأی داور و کدهای رد).
+- [ ] نگهداری بردارها در موجودیت مستقل و نسخه‌بندی‌شدهٔ `embeddings` برای سؤال‌ها و تکه‌های کتاب.
+- [ ] فیلدهای کنترلی (`status`, `judge_score`, `judge_reasoning`, `solver_answer`, `solver_agreement`, `novelty_score`, `verification_methods`, `reject_reason_codes`, `change_type`, `cost`) برای سؤال تولیدشده ذخیره و خوانده شوند.
+- [ ] امکان ثبت چند روش در `verification_methods` به‌صورت مستقل از فیلدهای انسانی.
+- [ ] امکان ثبت فیلدهای انسانی (`human_verified`, `human_verified_by`, `human_verified_at`, `human_review_notes`) در هر زمان، مستقل از تنظیم سیستمی `require_human_verification`.
+- [ ] ارجاع به تکه‌های کتاب درسی در جدول `textbook_references` با فیلد `reference_role` (`study_reference` یا `answer_evidence`) و نمرهٔ شباهت ذخیره شود.
+- [ ] پشتیبانی از سلسله‌مراتب درختی در دسته‌بندی آموزشی (`book > lesson > chapter > topic`) و تفکیک کتاب‌های دوازدهم رشته ریاضی و تجربی.
 - [ ] فیلدهای تصویر (`has_figure`, `figure_asset`) برای سؤال‌های استخراج‌شده ذخیره شوند.
-- [ ] فیلدهای تأیید انسانی (`human_verified`, `human_verified_by`, `human_verified_at`) در صورت فعال بودن تنظیمات ثبت شوند.
 - [ ] ساختار مستقل `question_set` با ارتباط چندبه‌چند و ترتیب (`position`) بدون ایجاد وابستگی والد–فرزندی عمل کند.
 
 این موارد برای تطبیق با `data-model.md` هستند و به معنی تصمیم دربارهٔ UI، API یا ساختار جداول نیستند.
