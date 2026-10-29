@@ -13,13 +13,14 @@
 - [ ] سؤال ترکیبی بتواند چند مبحث یا فصل مرتبط داشته باشد.
 - [ ] تغییر یکی از سه نوع رابطه، دو نوع دیگر را بدون درخواست صریح تغییر ندهد.
 - [ ] صرف ارتباط یا شباهت سؤال‌ها، رابطهٔ منشأ تولید ایجاد نکند.
-- [ ] فیلدهای محتوای پایه (`question_text`, `options`, `correct_answer`, `solution`, `source_info`, `question_kind`) ذخیره شوند.
+- [ ] فیلدهای محتوای پایه (`question_text`, `options`, `correct_answer`, `solution`, `source_id`, `question_number`, `question_kind`) ذخیره شوند و موجودیت مستقل `source` (ناشر، نام آزمون، سال، نوبت، دفترچه) پشتیبانی شود.
+- [ ] سؤال‌های تولیدشده دارای `source_id = null` باشند و تبار آن‌ها منحصراً از طریق `generation_sources` به سؤال‌های مبنا متصل گردد.
 - [ ] اتصال `related_exam_questions` منحصراً به سؤال‌هایی با `question_kind = 'exam'` محدود شود.
 - [ ] فیلدهای شواهد (`evidence_reason`, `change_type_applied`) در رابطهٔ `generation_sources` ذخیره شوند.
-- [ ] ثبت هر دور از حلقه در موجودیت `generation_attempts` با تمام جزئیات (توکن‌ها، هزینه، خروجی Solver، تطابق، رأی داور و کدهای رد).
+- [ ] ثبت هر دور از حلقه در موجودیت `generation_attempts` با تمام جزئیات تفکیک‌شده (توکن‌ها، هزینه، خروجی Solver، تطابق با کلید `solver_matches_key`، سهم تطابق `solver_agreement`، خروجی و استدلال مستقل Judge و کدهای رد).
 - [ ] نگهداری بردارها در موجودیت مستقل و نسخه‌بندی‌شدهٔ `embeddings` برای سؤال‌ها و تکه‌های کتاب.
-- [ ] فیلدهای کنترلی (`status`, `judge_score`, `judge_reasoning`, `solver_answer`, `solver_agreement`, `novelty_score`, `verification_methods`, `reject_reason_codes`, `change_type`, `cost`) برای سؤال تولیدشده ذخیره و خوانده شوند.
-- [ ] امکان ثبت چند روش در `verification_methods` به‌صورت مستقل از فیلدهای انسانی.
+- [ ] فیلدهای کنترلی (`status`, `judge_score`, `judge_reasoning`, `solver_answer`, `solver_matches_key`, `solver_agreement`, `novelty_score`, `verification_methods`, `reject_reason_codes`, `change_type`, `cost`) برای سؤال تولیدشده ذخیره و خوانده شوند.
+- [ ] امکان ثبت چند روش در `verification_methods` منحصراً با مقادیر `code`, `grounded`, `llm_only` به‌صورت مستقل از فیلدهای انسانی.
 - [ ] امکان ثبت فیلدهای انسانی (`human_verified`, `human_verified_by`, `human_verified_at`, `human_review_notes`) در هر زمان، مستقل از تنظیم سیستمی `require_human_verification`.
 - [ ] ارجاع به تکه‌های کتاب درسی در جدول `textbook_references` با فیلد `reference_role` (`study_reference` یا `answer_evidence`) و نمرهٔ شباهت ذخیره شود.
 - [ ] پشتیبانی از سلسله‌مراتب درختی در دسته‌بندی آموزشی (`book > lesson > chapter > topic`) و تفکیک کتاب‌های دوازدهم رشته ریاضی و تجربی.
@@ -33,9 +34,9 @@
 ### چک‌لیست الزامات اجرایی حلقه
 - [ ] **آزمون طلایی:** Solver روی سؤال‌های کنکور واقعی با کلید رسمی ارزیابی شود و نتیجه مستند شود.
 - [ ] Judge روی همان مجموعهٔ آزمون طلایی ارزیابی شود و عملکرد آن ثبت گردد.
-- [ ] وضعیت `approved` در API و خروجی به‌عنوان «تأیید خودکار هوش مصنوعی» برچسب‌گذاری شده باشد.
-- [ ] اگر `require_human_verification=true`: فقط سؤال‌های `human_verified=true` در خروجی نهایی ظاهر شوند.
-- [ ] اگر `require_human_verification=false`: سیستم صریحاً اعلام کند خروجی تأیید انسانی نشده.
+- [ ] وضعیت `approved` در API و خروجی به‌عنوان «تأیید خودکار هوش مصنوعی، فاقد تضمین صحت علمی و فاقد تأیید انسانی» برچسب‌گذاری شده باشد.
+- [ ] اگر `require_human_verification=true`: فقط سؤال‌های دارای `human_verified=true` در خروجی نهایی ظاهر شوند.
+- [ ] اگر `require_human_verification=false`: سیستم صریحاً اعلام کند خروجی تأیید خودکار است و تأیید انسانی نشده.
 - [ ] سقف تکرار رعایت شود.
 - [ ] سؤال با چند پاسخ صحیح رد شود.
 - [ ] سؤال تکراری رد شود.
